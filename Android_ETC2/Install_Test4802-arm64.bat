@@ -8,19 +8,19 @@ if not "%1"=="" set DEVICE=-s %1
 for /f "delims=" %%A in ('%ADB% %DEVICE% shell "echo $EXTERNAL_STORAGE"') do @set STORAGE=%%A
 @echo.
 @echo Uninstalling existing application. Failures here can almost always be ignored.
-%ADB% %DEVICE% uninstall com.YourCompany.Test4802
+%ADB% %DEVICE% uninstall com.YourCompany.Test4802_2
 @echo.
 @echo Installing existing application. Failures here indicate a problem with the device (connection or storage permissions) and are fatal.
 %ADB% %DEVICE% install Test4802-arm64.apk
 @if "%ERRORLEVEL%" NEQ "0" goto Error
-%ADB% %DEVICE% shell rm -r %STORAGE%/UE4Game/Test4802
+%ADB% %DEVICE% shell rm -r %STORAGE%/UE4Game/Test4802_2
 %ADB% %DEVICE% shell rm -r %STORAGE%/UE4Game/UE4CommandLine.txt
-%ADB% %DEVICE% shell rm -r %STORAGE%/obb/com.YourCompany.Test4802
-%ADB% %DEVICE% shell rm -r %STORAGE%/Android/obb/com.YourCompany.Test4802
-%ADB% %DEVICE% shell rm -r %STORAGE%/Download/obb/com.YourCompany.Test4802
+%ADB% %DEVICE% shell rm -r %STORAGE%/obb/com.YourCompany.Test4802_2
+%ADB% %DEVICE% shell rm -r %STORAGE%/Android/obb/com.YourCompany.Test4802_2
+%ADB% %DEVICE% shell rm -r %STORAGE%/Download/obb/com.YourCompany.Test4802_2
 @echo.
 @echo Installing new data. Failures here indicate storage problems (missing SD card or bad permissions) and are fatal.
-%ADB% %DEVICE% push main.1.com.YourCompany.Test4802.obb %STORAGE%/obb/com.YourCompany.Test4802/main.1.com.YourCompany.Test4802.obb
+%ADB% %DEVICE% push main.1.com.YourCompany.Test4802_2.obb %STORAGE%/obb/com.YourCompany.Test4802_2/main.1.com.YourCompany.Test4802_2.obb
 if "%ERRORLEVEL%" NEQ "0" goto Error
 
 
@@ -34,8 +34,8 @@ if "%ERRORLEVEL%" NEQ "0" goto Error
 
 @echo.
 @echo Grant READ_EXTERNAL_STORAGE and WRITE_EXTERNAL_STORAGE to the apk for reading OBB file or game file in external storage.
-%ADB% %DEVICE% shell pm grant com.YourCompany.Test4802 android.permission.READ_EXTERNAL_STORAGE
-%ADB% %DEVICE% shell pm grant com.YourCompany.Test4802 android.permission.WRITE_EXTERNAL_STORAGE
+%ADB% %DEVICE% shell pm grant com.YourCompany.Test4802_2 android.permission.READ_EXTERNAL_STORAGE
+%ADB% %DEVICE% shell pm grant com.YourCompany.Test4802_2 android.permission.WRITE_EXTERNAL_STORAGE
 @echo.
 @echo Installation successful
 goto:eof
